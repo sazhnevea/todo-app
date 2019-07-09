@@ -3,15 +3,29 @@ import './search-panel.css';
 
 export default class SearchPanel extends Component {
 
+
+  state = {
+    term: '',
+  }
+
+  onSearchChange = (e) => {
+    const term = e.target.value;
+    this.setState({term});
+    this.props.onSearchChange(term);
+
+  }
+
   onChange = (evt) => {
-  	console.log(evt.target.value)
+    this.props.onFilterValue(evt.target.value)
   }
 
   render() {
   	return (
-    <input type="text"
-           className="form-control search-input"
-           placeholder="type to search"
-           onChange={this.onChange} />
-  )};
+      <input type="text"
+      className="form-control search-input"
+      placeholder="type to search"
+      value={this.state.term}
+      onChange={this.onSearchChange} />
+      )
+  };
 };
